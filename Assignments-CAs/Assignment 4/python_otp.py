@@ -44,8 +44,6 @@ class OTPService:
             print("Given OTP was correct")
         else:
             print("Given OTP was incorrect")
-        
-
 
 
 if __name__ == "__main__":
@@ -57,7 +55,6 @@ if __name__ == "__main__":
 
     otpSender = OTPService(EMAIL, EMAIL_PASSWD)
     otpSender.initiateServer()
-
 
     # Taking Input
     print("Please Enter your Email to receive OTP")

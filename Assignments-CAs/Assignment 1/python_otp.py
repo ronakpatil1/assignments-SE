@@ -1,6 +1,6 @@
 
 #    This is a simple program to send OTP to the given email id using python smtplib
-   
+
 
 from dotenv import load_dotenv, find_dotenv
 from os import environ as env
@@ -16,7 +16,7 @@ load_dotenv(find_dotenv())
 
 SENDER_EMAIL = env.get('EMAIL')
 SENDER_EMAIL_PASSWD = env.get('PASSWORD')
-OTP_LENGTH = env.get("OTP_LENGTH")
+OTP_LENGTH = int(env.get("OTP_LENGTH"))
 
 # regular expression for validating an Email
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -32,12 +32,10 @@ if __name__ == "__main__":
         print("Please enter a valid email address")
         receiver_email = input("Email: ")
 
-
     # Generating OTP
     digits = "0123456789"
     otp = random.sample(digits, OTP_LENGTH)
     OTP = "".join(otp)
-
 
     # Sending OTP
     msg = '\n\nThe One Time Password(OTP) is: ' + str(OTP)
@@ -47,7 +45,6 @@ if __name__ == "__main__":
     s.login(SENDER_EMAIL, SENDER_EMAIL_PASSWD)
     s.sendmail(SENDER_EMAIL, receiver_email, msg)
     s.quit()
-
 
     print()
     print("OTP is sent to the given email address")

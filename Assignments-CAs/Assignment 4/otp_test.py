@@ -14,6 +14,7 @@ EMAIL = env.get('EMAIL')
 EMAIL_PASSWD = env.get('PASSWORD')
 LENGTH = int(env.get("OTP_LENGTH"))
 
+
 class TestOTPService(unittest.TestCase):
 
     def setUp(self):
@@ -42,30 +43,30 @@ class TestOTPService(unittest.TestCase):
     def test_sendMail(self):
         print("\n\t----------Testing For sendMail---------\n")
 
-        email1 = "" # Enter email for test
-        email2 = "" # Enter different email for test
+        email1 = ""  # Enter email for test
+        email2 = ""  # Enter different email for test
 
         expected_output = "\n\tOTP is sent to the given email address\n"
 
-        with patch('sys.stdout', new = StringIO()) as output:
+        with patch('sys.stdout', new=StringIO()) as output:
             self.otpService.generateOTP(6)
             self.otpService.sendMail(email1)
             self.assertEqual(output.getvalue(), expected_output)
 
-        with patch('sys.stdout', new = StringIO()) as output:
+        with patch('sys.stdout', new=StringIO()) as output:
             self.otpService.generateOTP(6)
             self.otpService.sendMail(email2)
             self.assertEqual(output.getvalue(), expected_output)
-    
+
     def test_validateOTP(self):
         print("\n\t----------Testing For validateOTP----------\n")
 
-        with patch('sys.stdout', new = StringIO()) as output:
+        with patch('sys.stdout', new=StringIO()) as output:
             self.otpService.generateOTP(5)
             self.otpService.validateOTP(self.otpService._OTP)
             self.assertEqual(output.getvalue(), "Given OTP was correct\n")
 
-        with patch('sys.stdout', new = StringIO()) as output:
+        with patch('sys.stdout', new=StringIO()) as output:
             self.otpService.generateOTP(5)
             self.otpService.validateOTP("")
             self.assertEqual(output.getvalue(), "Given OTP was incorrect\n")
